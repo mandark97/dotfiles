@@ -9,8 +9,8 @@
 /bower_components/
 /log
 /node_modules/
+/vendor/cache/
 /tmp
-/vendor
 db/*.sqlite3
 log/*.log
 rerun.txt

@@ -5,6 +5,7 @@
 [color]
   ui = auto
 [alias]
+  toggl = "!git log --pretty=format:\"%Cblue%ad%Creset : %an :%C(yellow)%d %Creset:%Cgreen %s \" --reverse --all --since=1.month.ago --author=\"$(git config user.name)\""
   aa = add --all
   ap = add --patch
   branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
@@ -15,8 +16,8 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
-[merge]
-  ff = only
+# [merge]
+  # ff = only
 [commit]
   template = ~/.gitmessage
 [fetch]
@@ -27,3 +28,8 @@
   path = ~/.gitconfig.local
 [diff]
   colorMoved = zebra
+[user]
+	email = matei.melinte@sparktech.ro
+	name = Matei
+[cola]
+	spellcheck = false

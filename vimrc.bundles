@@ -14,32 +14,48 @@ let g:has_async = v:version >= 800 || has('nvim')
 
 call plug#begin('~/.vim/bundle')
 
-" Define bundles via Github repos
-Plug 'christoomey/vim-run-interactive'
+" themes
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Tools
 if executable('fzf')
-  Plug '/usr/local/opt/fzf'
+  Plug '~/.fzf'
 else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 endif
 Plug 'junegunn/fzf.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'fatih/vim-go'
-Plug 'janko-m/vim-test'
-Plug 'pangloss/vim-javascript'
-Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/tComment'
+Plug 'scrooloose/nerdtree'
+Plug 'christoomey/vim-run-interactive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-eunuch'
 Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-repeat'
+Plug 'janko-m/vim-test'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-projectionist'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'wakatime/vim-wakatime'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Rails
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-rake'
+Plug 'ngmy/vim-rubocop'
+
+" Javascript
+Plug 'pangloss/vim-javascript'
+
 
 if g:has_async
   Plug 'dense-analysis/ale'
