@@ -6,9 +6,6 @@ ARG UID=1000
 ARG GID=1000
 ARG PW=docker
 
-RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \
-      chpasswd
-
 # Locales
 RUN apt-get update && apt-get install -y locales
 ENV LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
@@ -34,13 +31,13 @@ RUN apt-get update && apt-get install -y \
       wget \
       tmux \
       vim \
-      zsh \
-      ledger \
-      mosh \
+      neovim \
+      fish \
       postgresql-client \
-      jq \
       rsync \
-      lastpass-cli
+      sudo
+
+RUN  useradd mateimelinte && echo "mateimelinte:mateimelinte" | chpasswd && adduser --disabled-password mateimelinte sudo
 
 # Install bundler 2
 RUN gem install bundler -v 2
@@ -71,26 +68,29 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 # RUN add-apt-repository ppa:neovim-ppa/stable
 RUN apt-get update && apt-get install -y neovim
-# Install oh-my-zsh
-RUN chsh -s /usr/bin/zsh
-RUN curl -L http://install.ohmyz.sh | sh || true
+# # Install oh-my-zsh
+# RUN chsh -s /usr/bin/zsh
+# RUN curl -L http://install.ohmyz.sh | sh || true
 
-USER ${USER}
+# USER ${USER}
 WORKDIR /home/${USER}
 # Set up dotfiles
 # COPY zsh .
-COPY --chown=${UID}:${GID} vimrc .vimrc
-COPY --chown=${UID}:${GID} vimrc.bundles .vimrc.bundles
-COPY --chown=${UID}:${GID} vim .vim
-COPY --chown=${UID}:${GID} tmux.conf .tmux.conf
-COPY --chown=${UID}:${GID} init.vim .config/nvim/init.vim
+COPY vimrc .vimrc
+COPY vimrc.bundles .vimrc.bundles
+COPY vim .vim
+COPY tmux.conf .tmux.conf
+COPY init.vim .config/nvim/init.vim
+RUN chown -R ${USER} /home/${USER}
 # COPY ./git/* ${HOME}/
+USER ${USER}
 RUN nvim +PlugInstall +qall > /dev/null
 # Set up volumes
-WORKDIR /projects
+# WORKDIR /projects
 # VOLUME /projects
 # VOLUME /keys
 # Enable colors
 ENV TERM=xterm-256color
 
-ENTRYPOINT ["bash"]
+
+ENTRYPOINT ["fish"]

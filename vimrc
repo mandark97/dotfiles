@@ -182,8 +182,10 @@ nmap <Leader>r :RuboCop -a<CR>
 let NERDTreeShowHidden=1
 
 set tags^=./.git/tags;
-colorscheme gruvbox
-set background=dark    " Setting dark mode
+" colorscheme gruvbox
+" set background=dark    " Setting dark mode
+
+colorscheme monokai
 
 function! s:check_back_space() abort
   let col = col('.') - 1
